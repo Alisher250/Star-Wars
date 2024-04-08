@@ -1,5 +1,5 @@
 
-![alisher](https://github.com/Alisher250/Star-Wars/assets/81162609/9026f7a2-2a3f-4569-905a-26a6e9ccb5c2)
+![alisher](https://github.com/Alisher250/Star-Wars/assets/81162609/1520fd06-ade8-4d1f-8dec-2660a9182660)
 
 Руководство по настройке веб-приложения:
 
