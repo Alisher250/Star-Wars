@@ -154,6 +154,10 @@
 					</div>
 					{% endfor %}
 				</div>
+				<div class="filter-group">
+					<p class="filter-heading"><b>Search</b></p>
+					<input type="text" name="q" placeholder="Search...">
+				</div>
 				<input class="search-button" type="submit" value="Search">
 			</form>
 		</div>
@@ -182,8 +186,56 @@
 			</div>
 		</div>
 		
-		
 </div>
+
+
+
+<div class="characters">
+    <h2>Star Wars Characters</h2>
+	<h2>Star Wars Characters</h2>
+    <ul>
+        {% for character in characters %}
+            <li>{{ character.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="films">
+    <h2>Star Wars Films</h2>
+    <ul>
+        {% for film in films %}
+            <li>{{ film.title }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="planets">
+    <h2>Star Wars Planets</h2>
+    <ul>
+        {% for planet in planets %}
+            <li>{{ planet.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="starships">
+    <h2>Star Wars Starships</h2>
+    <ul>
+        {% for starship in starships %}
+            <li>{{ starship.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="others">
+    <h2>Other Aspects of Star Wars</h2>
+    <ul>
+        {% for other in others %}
+            <li>{{ other.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
 
 <script>
 	document.addEventListener("DOMContentLoaded", function() {

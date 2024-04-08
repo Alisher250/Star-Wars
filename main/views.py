@@ -19,23 +19,6 @@ import asyncio
 from threading import Thread
 
 
-async def refresh_msg(nickname, msg_box):
-    global chat_msgs
-    last_idx = len(chat_msgs)
-
-    while True:
-        await asyncio.sleep(1)
-        
-        for m in chat_msgs[last_idx:]:
-            if m[0] != nickname: # if not a message from current user
-                msg_box.append(put_markdown(f"`{m[0]}`: {m[1]}"))
-        
-        # remove expired
-        if len(chat_msgs) > MAX_MESSAGES_COUNT:
-            chat_msgs = chat_msgs[len(chat_msgs) // 2:]
-        
-        last_idx = len(chat_msgs)
-
 @transaction.atomic
 def index(request):
     context = {}
@@ -94,7 +77,6 @@ def create_story(request):
         except Hobby.DoesNotExist:
             return HttpResponse("Hobby does not exist")
 
-        # Check if a story with the same title already exists
         if Stories.objects.filter(title=title).exists():
             return HttpResponse("A story with the same title already exists")
 
@@ -112,20 +94,9 @@ def create_story(request):
 
     return render(request, 'main/create_story.html', {'hobbies': hobbies})
 
-def education(request):
-    return render(request, 'main/education.html')
+import requests
 
-def meetings_working(request):
-    return render(request, 'main/meetings_working.html')
-
-def education1(request):
-    return render(request, 'main/education1.html')
-
-def education2(request):
-    return render(request, 'main/education2.html')
-    
-def education3(request):
-    return render(request, 'main/education3.html')
+import requests
 
 def stories(request):
     hobbies = Hobby.objects.all()
@@ -133,6 +104,36 @@ def stories(request):
     selected_hobbies_names = request.GET.getlist('Hobby') 
     selected_hobbies_ids = []
     selected_hobbies = []
+
+    response_characters = requests.get('https://swapi.dev/api/people/')
+    if response_characters.status_code == 200:
+        characters = response_characters.json()['results']
+    else:
+        characters = []
+
+    response_films = requests.get('https://swapi.dev/api/films/')
+    if response_films.status_code == 200:
+        films = response_films.json()['results']
+    else:
+        films = []
+
+    response_planets = requests.get('https://swapi.dev/api/planets/')
+    if response_planets.status_code == 200:
+        planets = response_planets.json()['results']
+    else:
+        planets = []
+
+    response_starships = requests.get('https://swapi.dev/api/starships/')
+    if response_starships.status_code == 200:
+        starships = response_starships.json()['results']
+    else:
+        starships = []
+
+    response_other = requests.get('https://swapi.dev/api/vehicles/')
+    if response_other.status_code == 200:
+        others = response_other.json()['results']
+    else:
+        others = []
 
     if selected_hobbies_names:
         for hobby_name in selected_hobbies_names:
@@ -147,6 +148,10 @@ def stories(request):
         comment = Comment.objects.all()
         stories = Stories.objects.all()
 
+    query = request.GET.get('q')
+    if query:
+        stories = stories.filter(title__icontains=query)
+
     if request.method == 'GET':
         liked_story_title = request.GET.get('like_story')
         if liked_story_title:
@@ -155,7 +160,9 @@ def stories(request):
             liked_story.save()
             return redirect("stories")
 
-    return render(request, 'main/stories.html', {'stories': stories, 'hobbies': hobbies, 'selected_hobbies': selected_hobbies, 'comment':comment})
+    return render(request, 'main/stories.html', {'stories': stories, 'hobbies': hobbies, 'selected_hobbies': selected_hobbies, 'comment':comment, 'characters': characters, 'films': films, 'planets': planets, 'starships': starships, 'others': others})
+
+
 
 def communities(request):
     hobbies = Hobby.objects.all()
@@ -193,15 +200,12 @@ def community_detail(request, community_id):
             selected_hobbies_ids.append(selected_hobby.id)
             selected_hobbies.append(selected_hobby)
 
-        # Filter communities based on selected hobbies
         communities = UserProfile.objects.filter(hobby__in=selected_hobbies_ids)
         comment = Comment.objects.all()
     else:
-        # Fetch all communities if no hobbies are selected
         communities = UserProfile.objects.filter(id=community_id)
         comment = Comment.objects.all()
 
-    # Pass the community_id to the template context
     context = {
         'community': community,
         'communities':communities,
@@ -209,18 +213,10 @@ def community_detail(request, community_id):
         'selected_hobbies': selected_hobbies,
         'stories': stories,
         'comment':comment,
-        'community_id': community_id  # Pass the community_id
+        'community_id': community_id 
     }
 
     return render(request, 'main/community_detail.html', context)
-
-def start_chat_server():
-    asyncio.set_event_loop(asyncio.new_event_loop())  # Create a new event loop
-    start_server(main, port=8080, cdn=False, debug=True)  # Specify host and port
-
-def chat_detail(request):
-    Thread(target=start_chat_server).start()
-    return redirect("http://127.0.0.1:8080/")
 
 def story_detail(request, story_id):
     hobbies = Hobby.objects.all()
@@ -261,7 +257,6 @@ def story_detail(request, story_id):
             liked_story.save()
             return redirect("story_detail", story_id=story_id)
     
-    # Pass the story_id to the template context
     context = {
         'story': story,
         'hobbies': hobbies,
@@ -271,10 +266,6 @@ def story_detail(request, story_id):
     }
     
     return render(request, 'main/stories_detail.html', context)
-
-def ar(request):
-    context = {}
-    return render(request, 'main/ar.html', context)
 
 def loginsystem(request):
     if request.method == 'POST':
@@ -294,7 +285,6 @@ def loginsystem(request):
 def signupsystem(request):
     hobbies = Hobby.objects.all()
     if request.method == 'POST':
-        # Extract form data
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
@@ -305,27 +295,22 @@ def signupsystem(request):
         photo = request.FILES.get('photo')
         bio = request.POST.get('bio')
 
-        # Validate passwords
         if password1 != password2:
             return HttpResponse("Passwords do not match")
 
-        # Check if username already exists
         if User.objects.filter(username=username).exists():
             return HttpResponse("Username is already taken")
 
         try:
-            # Get selected hobby
             hobby = Hobby.objects.get(pk=hobby_id)
         except Hobby.DoesNotExist:
             return HttpResponse("Hobby does not exist")
 
-        # Create User instance
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.first_name = first_name
         user.last_name = last_name
         user.save()
 
-        # Create UserProfile instance and associate it with User instance
         userprofile = UserProfile.objects.create(
             user=user,
             hobby=hobby,
@@ -334,7 +319,6 @@ def signupsystem(request):
         )
         userprofile.save()
 
-        # Authenticate and login user
         user = authenticate(username=username, password=password1)
         if user is not None:
             login(request, user)
