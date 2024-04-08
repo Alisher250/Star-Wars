@@ -1,0 +1,79 @@
+#map {
+      position: absolute;
+      top: 220px;
+      left: 2%;
+      width: 90%;
+      height: 450px;
+      border-radius: 20px;
+      transition: .4s;
+    }
+
+.wrapper{
+    margin-top: 100px;
+    margin-left: 2%;
+    font-family: 'Inter', sans-serif;
+}
+.wrapper button{
+    position: absolute;
+    top: 690px;
+    border: none;
+    border-radius:10px;
+    background-color: #FED65C;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    height: 50px;
+    width: 165px;
+    transition: .4s;
+    text-align: left;
+}
+
+.wrapper button p{
+    margin-left: 5px;
+}
+
+.wrapper button:hover{
+    width: 300px;
+    text-align: left;
+    background-color: #ffe8a3;
+}
+
+.wrapper button i{
+    position: absolute;
+    opacity: 0;
+    right: 20px;
+    transition: .2s;
+    font-size: 30px;
+    margin: 0px;
+    bottom: 10px;
+    color: green;
+}
+
+.wrapper button:hover>i{
+    opacity: 1;
+}
+
+#content.shrink #map{
+    width: calc(90% - 260px);
+}
+
+@media (max-width: 480px){
+   h1{
+     font-size: 20px
+   }
+   form input{
+        width: 100px;
+   }
+   #map{
+        height: 300px;
+   }
+   .wrapper button{
+       top: 550px;
+   }
+
+   #map{
+        z-index: 1;
+   }
+   #content.shrink #map{
+    width: 90%;}
+
+}

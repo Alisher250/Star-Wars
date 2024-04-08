@@ -1,0 +1,182 @@
+{% load static %}
+<link rel="icon" type="image/x-icon" href="{% static 'images/icon.jpg' %}">
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #3350a0;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+        }
+        header a {
+            background-color: #3350a0;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+            text-decoration: none;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: auto;
+            height: 100vh;
+        }
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%; /* Set a wider width for the form */
+            padding: 40px; /* Increase padding for more space */
+            font-size: 18px; /* Increase font size for better readability */
+            max-width: 800px; /* Limit maximum width */
+        }
+        .reg-t {
+            text-align: center;
+            color: #3350a0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 14px;
+            color: #3350a0;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: calc(100% - 20px); /* Use calc to consider padding */
+            padding: 15px; /* Increase padding for larger size */
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 18px; /* Increase font size */
+            margin-bottom: 20px; /* Add space between form elements */
+        }
+
+        /* Adjust the width of the button and increase padding */
+        .button {
+            width: 100%; /* Set the width to fill the container */
+            padding: 15px; /* Increase padding for larger size */
+            border-radius: 8px;
+            border: none;
+            background-color: #3350a0;
+            color: white;
+            font-size: 18px; /* Increase font size */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-text {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .button-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn {
+            border: 2px solid #3350a0;
+            color: #3350a0;
+            background-color: transparent;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3350a0;
+            color: white;
+        }
+
+        .file-input {
+            position: absolute;
+            font-size: 100px;
+            opacity: 0;
+            right: 0;
+            top: 0;
+        }
+
+        #image-preview {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #image-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        textarea  
+        {  
+            font-family:"Arial", Times, serif;  
+            font-size: 16px;   
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" style="text-align: center;">BIRGE</a>
+    </header>
+    <div class="main">
+        <div class="content">
+            <h1 class="reg-t">Create Planet</h1>
+            <form action="{% url 'create_story' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form" id="name">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" autocomplete="off" required />
+                </div>
+                <div class="form" id="s-name">
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" autocomplete="off" required></textarea>
+                </div>
+                <div class="form" id="tel">
+                    <label for="hobby">Character:</label>
+                    <select id="hobby" name="hobby" required>
+                        {% for hobby in hobbies %}
+                            <option value="{{ hobby.id }}">{{ hobby.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form" id="username">
+                    <label for="photo" style="display: flex; justify-items: center;">Photo:</label>
+                    <br>
+                    <div class="upload-btn-wrapper">
+                        <button class="btn">Choose Image</button>
+                        <input type="file" id="photo" name="photo" class="file-input" accept="image/*" onchange="previewImage(event)" required />
+                    </div>
+                </div>
+                <button class="button" type="submit">
+                    <p class="button-text">Continue</p>
+
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

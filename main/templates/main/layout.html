@@ -1,0 +1,128 @@
+{% load static %}
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/lay-d.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/icon.jpg' %}">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="-1" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .choose {
+        background-color: #1554b9;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .choose:hover {
+      background-color: #461dce;
+      }
+    </style>
+	{% block style %}{% endblock %}
+</head>
+<body>
+	<div class="navbar">
+		<ul class="navbar-l">
+			<li class="navbar-i"><a href="/">STAR WARS</a>
+			</li>
+			<li class="navbar-i" id = "but"><button onclick ="show()"><i class="fa fa-bars" aria-hidden="true" style="color:white;"></i></button>
+			</li>
+			<li class="navbar-i" style="float: right;"><a href="mailto: orrynbai.a@gmail.com">Help</a>
+			</li>
+			<li class="navbar-i" style="float: right;"><a href="/profileo">Profile</a>
+			</li>
+		</ul>
+	</div>
+	<div id="sidebar">
+  	<div class="table-container">
+    	<table>
+      <tr>
+        <td><i class="fa fa-home icon" aria-hidden="true"></i></td>
+        <td class="text"><a href="/">Home Page</a></td>
+      </tr>
+      <tr>
+        <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
+        <td class="text"><a href="/profileo">Profile</a></td>
+      </tr>
+      <tr>
+        <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
+        <td class="text"><a href="/stories">Planets</a></td>
+      </tr>
+      <tr>
+        <td><i class="fa fa-address-card icon" aria-hidden="true"></i></td>
+        <td class="text"><a href="/communities">Characters</a></td>
+      </tr>
+    	</table>
+  	</div>
+	</div>
+
+  <div id="content">
+	   {% block content %}
+	   {% endblock %}
+  </div>
+  <script>
+
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var container = document.getElementById('content');
+            container.style.opacity = 1;
+        }, 500);
+    });
+
+    function toggleReadonly() {
+        var inputElements = document.querySelectorAll('input');
+
+
+        document.getElementById('data').classList.toggle('edit');
+        document.getElementById('ed').classList.toggle('edit');
+
+
+        inputElements.forEach(function(inputElement) {
+            if (inputElement.readOnly) {
+                inputElement.readOnly = false;
+            } else {
+                inputElement.readOnly = true;
+            }
+        });
+
+
+        var izButton = document.getElementById("iz");
+        if (izButton.innerHTML === "Edit") {
+            izButton.innerHTML = "Cancel";
+            document.getElementById('sub').style.opacity = 1;
+        } else {
+            izButton.innerHTML = "Edit";
+            document.getElementById('sub').style.opacity = 0;
+        }
+    }
+
+    function show() {
+        var sidebar = document.getElementById('sidebar');
+        var content = document.getElementById('content');
+        var buttonIcon = document.querySelector('#but i');
+
+        sidebar.classList.toggle('active');
+        content.classList.toggle('shrink');
+        if (buttonIcon.classList.contains('fa-bars')) {
+            buttonIcon.classList.remove('fa-bars');
+            buttonIcon.classList.add('fa-times');
+        } else {
+            buttonIcon.classList.remove('fa-times');
+            buttonIcon.classList.add('fa-bars');
+        }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+<style>
+	body {
+        font-family: Arial, sans-serif;
+    }
+
+	.container {
+		width: 200px; 
+		height: 50px; 
+		background-image: linear-gradient(to right, #C15CFE, #6506AF);
+		border-radius: 8px;
+		padding: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		background-color: #fff;
+		color: #333;
+		padding: 10px 20px; 
+		border-radius: 5px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		transition: background-color 0.3s ease; 
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.container:hover {
+		background-color: #f0f0f0; 
+	}
+
+</style>
+{% block style %}
+	<link rel="stylesheet" href="{% static 'css/home-d.css' %}">
+	<title>Home Page</title>
+	<link rel="icon" type="image/x-icon" href="{% static 'images/icon.jpg' %}">
+{% endblock %}
+
+{% block content %}
+	<div class="wrapper">
+		
+		<header style="background-color: #4C35A7; display: flex; justify-content: space-between;">
+			<div class="title-wrapper">
+				<h1 class="title"><b>Star Wars</b></h1>
+				<p class="tit-des" style="font-size: 26px;">Welcome to Star Wars universe! Have fun and explore galaxies</p>
+				<div id="start" style="background-image: linear-gradient(to right, #C15CFE, #6506AF); text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+					<a href="{% url 'loginsystem' %}" style="color: white;">Log In |</a>
+					<a href="{% url 'signupsystem' %}" style="color: white; margin-left: -240px;">Sign up</a>
+					<div class="span"><i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i></div>	
+				</div>
+			</div>
+			<img src="{% static 'images/bgbg.png' %}" alt="Mask" style="width: 800px;">
+		</header>
+		
+		
+		
+	</div>
+{% endblock %}

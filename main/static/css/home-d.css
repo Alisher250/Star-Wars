@@ -1,0 +1,302 @@
+.vozh{
+    width: 100%;
+    align-items: center;
+    table-layout: fixed;
+}
+.vozh h1{
+    font-family: 'Inter', sans-serif;
+    color: #1C3880;
+    font-size: 60px;
+}
+.vozh p{
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+}
+
+.vozh td{
+    align-items: center;
+}
+
+
+hr{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.poss td{
+    text-align: center;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; margin-top: 100px;}
+  100% { opacity: 1; margin-top: 0px;}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .square-animation{
+        animation: fadeIn 2s;
+    }
+}
+.wrapper {
+	height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+	perspective: 10px;
+}
+
+header {
+	position: relative;
+	display: flex;
+	height: 100%;
+	transform-style: preserve-3d;
+	z-index: -1;
+}
+
+.background {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	z-index: -1;
+	transform: translateZ(-10px) scale(2.1);
+}
+
+body {
+	margin: 0px;
+	overflow-y: hidden;
+	height: 100%;
+}
+
+.title-wrapper {
+	position: relative;
+	margin-top: 100px;
+	margin-left: 120px;
+	text-align: left;
+}
+
+.title {
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	font-size: 140px;
+	margin-bottom: 0px;
+}
+
+.tit-des {
+	position: relative;
+	color: white;
+	font-family: 'Inter', sans-serif;
+	margin-top: 0px;
+	font-size: 20px;
+}
+
+section{
+	padding: 2rem;
+	background-color: white;
+	color: black;
+	height: 1200px;
+}
+
+.title-main{
+	text-align: center;
+	font-family: 'Inter', sans-serif;
+	font-size: 40px;
+}
+
+.dushnila{
+	float:left;
+	margin: auto;
+	background-color: green;
+	height: 200px;
+	width: 100px;
+}
+
+.center-table td{
+    width: 15%;
+    vertical-align: top;
+}
+
+.center-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.center-tabl td img {
+    display: block;
+    margin: 0 auto;
+}
+
+
+.center-table p{
+    color: darkgray;
+}
+
+.center-table table {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.desd{
+	display: flex;
+    justify-content: center;
+}
+
+body {
+  margin: 0px;
+}
+
+header {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+#start {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 8%;
+  width: 70%;
+  background-color: yellow;
+  border-radius: 20px;
+  transition: .5s;
+}
+
+.span {
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: 2;
+  margin-right: 15px;
+}
+
+.span i {
+  margin: 10px;
+}
+
+#start a {
+  padding: 15px;
+  order: 1;
+  text-decoration: none;
+  color: black;
+  font-family: 'Inter', sans-serif;
+  font-size: 150%;
+}
+
+#start:hover{
+  background-color: #FED65C;
+}
+
+@media (max-width: 480px) {
+  .title {
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	font-size: 50px;
+	margin-bottom: 0px;}
+
+  .tit-des {
+	position: relative;
+	color: white;
+	font-family: 'Inter', sans-serif;
+	margin-top: 0px;
+	font-size: 15px;}
+
+  .title-wrapper {
+	position: relative;
+	margin-top: 200px;
+	margin-left: 20px;
+	text-align: left;}
+
+	#start {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 8%;
+  width: 70%;
+  background-color: yellow;
+  border-radius: 20px;
+  transition: .5s;
+}
+
+.span {
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: 2;
+  margin-right: 15px;
+}
+
+.span i {
+  margin: 12px;
+  font-size: 17px;
+}
+
+#start a {
+  padding: 15px;
+  order: 1;
+  text-decoration: none;
+  color: black;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+}
+.vozh{
+    width: 100%;
+    align-items: center;
+    table-layout: fixed;
+}
+.vozh h1{
+    font-family: 'Inter', sans-serif;
+    color: darkgreen;
+    font-size: 30px;
+}
+.vozh p{
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+}
+
+.vozh td{
+    align-items: center;
+}
+
+.vozh img{
+    height: 100px;
+    width: 100px;
+}
+
+#poss{
+    width: 100%;
+}
+
+#poss img{
+    height: 80px;
+    width: 80px;
+}
+
+#poss h1{
+    font-size: 12px;
+}
+
+#poss p{
+    font-size: 7px;
+}
+
+.title-main{
+    font-size: 40px;
+}
+
+section{
+    height: 600px;
+}
+
+}
